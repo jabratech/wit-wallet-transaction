@@ -1,9 +1,9 @@
 interface wallet-transaction-handler {
-  use jabratech:common/types.{response-error};
+  use jabratech:common/types.{response};
   use types.{wallet-transaction-response,create-request,update-request,delete-request};
 
-  get:  func(counterparty-ticker: option<list<string>>) -> result<wallet-transaction-response, response-error>;
-  create: func(request: create-request)-> result<response-error, response-error>;
-  update: func(request: update-request)-> result<response-error, response-error>;
-  delete: func(request: delete-request)-> result<response-error, response-error>;
+  get:  func(counterparty-ticker: option<list<string>>) -> result<wallet-transaction-response, response>;
+  create: func(request: create-request)-> result<bool, response>;
+  update: func(request: update-request)-> result<bool, response>;
+  delete: func(request: delete-request)-> result<bool, response>;
 }
