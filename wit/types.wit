@@ -1,0 +1,116 @@
+interface types {
+    use jabratech:common/types.{currency, counterparty, user};
+
+    record wallet-transaction-response{
+        code: s16,
+        message: string,
+        data: list<wallet-transaction>
+    }
+
+    record wallet-transaction{
+        id: s64,
+        user-created: user,
+        date-created: string,
+        user-updated: option<user>,
+        date-updated: option<string>,
+        transaction-type: string,
+        currency: currency,
+        amount: f64,
+        reference: string,
+        from-wallet: wallet,
+        to-wallet: wallet,
+        txn-hash: string,
+        fee-amount: f64,
+        venue-transaction-datetime: string,
+        description: string,
+        counterparty-id: counterparty,
+        is-submitted: bool, 
+    }
+
+    record wallet{
+        id: s8,
+        date-created: string,
+        date-updated: option<string>,
+        name: string,
+        address: string,
+        network: network, 
+        counterparty: counterparty,
+        currency: currency,
+    }
+
+    record network{
+        id: s8,
+        date-created: string,
+        date-updated: option<string>,
+        name: string,
+        description: option<string>,
+        chain-id: s8,
+        symbol: string 
+    }
+
+    record wallet-transaction-request{
+        id: s64,
+        transaction-type: string,
+        currency: s8,
+        amount: f64,
+        reference: string,
+        from-wallet: s8,
+        to-wallet: s8,
+        txn-hash: string,
+        fee-amount: f64,
+        venue-transaction-datetime: string,
+        description: string,
+        source-counterparty: s8,
+        destination-counterparty: s8,
+        usd-value: f64,
+        is-submitted: bool, 
+        exchange-rate: f64,
+    }
+
+    record wallet-transaction-create-request{
+        transaction-type: string,
+        currency: s8,
+        amount: f64,
+        reference: string,
+        from-wallet: s8,
+        to-wallet: s8,
+        txn-hash: string,
+        fee-amount: f64,
+        venue-transaction-datetime: string,
+        description: string,
+        counterparty-id: s8,
+        is-submitted: bool, 
+    }
+
+    record create-request{
+        user-email: string,
+        wallet-transactions: list<wallet-transaction-create-request>
+    }
+
+    record wallet-transaction-update-request{
+        id: option<s64>,
+        transaction-type: string,
+        currency: s8,
+        amount: f64,
+        reference: option<string>,
+        from-wallet: s8,
+        to-wallet: s8,
+        txn-hash: string,
+        fee-amount: f64,
+        venue-transaction-datetime: string,
+        description: string,
+        counterparty-id: s8,
+        is-submitted: bool, 
+    }
+
+    record update-request{
+        user-email: string,
+        wallet-transactions: list<wallet-transaction-update-request>
+    }
+
+    record delete-request{
+        user-email: string,
+        id: option<list<s64>>,
+        reference: option<list<string>>,
+    }
+}

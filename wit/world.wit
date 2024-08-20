@@ -1,0 +1,5 @@
+package jabratech:wallet-transaction-common;
+
+world wallet-transaction {
+    export wallet-transaction-handler;
+}
